@@ -25,13 +25,13 @@ for Quadrocopter Control by Jian Wang et al.) -->
   <xacro:property name="namespace" value="$(arg mav_name)" />
   <xacro:property name="rotor_velocity_slowdown_sim" value="10" />
   <xacro:property name="use_mesh_file" value="true" />
-  <xacro:property name="mesh_file" value="package://rotors_description/meshes/hummingbird.dae" />
+  <xacro:property name="mesh_file" value="package://rotors_description/meshes/crazyflie2.dae" />
   <xacro:property name="mass" value="0.025" /> <!-- [kg] -->
   <xacro:property name="body_width" value="0.03" /> <!-- [m] -->
   <xacro:property name="body_height" value="0.029" /> <!-- [m] -->
   <xacro:property name="mass_rotor" value="0.0005" /> <!-- [kg] -->
   <xacro:property name="arm_length" value="0.046" /> <!-- [m] -->
-  <xacro:property name="rotor_offset_top" value="0.029" /> <!-- [m] -->
+  <xacro:property name="rotor_offset_top" value="0.015" /> <!-- [m] -->
   <xacro:property name="radius_rotor" value="0.0225" /> <!-- [m] -->
   <xacro:property name="motor_constant" value="1.28192e-08" /> <!-- [kg m/s^2] -->
   <xacro:property name="moment_constant" value="5.964552e-03" /> <!-- [m] -->

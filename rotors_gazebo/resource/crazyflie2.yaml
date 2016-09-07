@@ -1,6 +1,8 @@
 # Crazyflie 2.0 vehicle parameters
 mass: 0.027
-inertia: {xx: 0.01152, xy: 0.0, xz: 0.0, yy: 0.01152, yz: 0.0, zz: 0.0218}
+inertia: {xx: 1.657171e-05, xy: 0.0, xz: 0.0, yy: 1.657171e-05, yz: 0.0, zz: 2.9261652e-05}
+
+# Forster's model
 
 # angle should be expressed in rad
 # direction 1 means counter clockwise, -1 clockwise

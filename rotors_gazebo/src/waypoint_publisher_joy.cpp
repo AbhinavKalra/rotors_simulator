@@ -65,8 +65,6 @@ public:
 WaypointJoy::WaypointJoy() {
   trajectory_pub_ = nh_.advertise<trajectory_msgs::MultiDOFJointTrajectory>(
     mav_msgs::default_topics::COMMAND_TRAJECTORY, 1);
-
-
 }
 
 void WaypointJoy::Start() {
@@ -97,7 +95,7 @@ void WaypointJoy::JoyCallback(const sensor_msgs::JoyConstPtr& msg) {
     msg->axes[1] * 0.01,
     msg->axes[4] * 0.01,
     msg->axes[3] * DEG_2_RAD * 180 };
-  // ROS_INFO("cmds_ %d %lf %lf %lf %lf", cmds_.seq, cmds_.x, cmds_.y, cmds_.z, cmds_.yaw);
+  ROS_INFO("cmds_ %d %lf %lf %lf %lf", cmds_.seq, cmds_.x, cmds_.y, cmds_.z, cmds_.yaw);
 }
 
 void WaypointJoy::TimerCallback(const ros::TimerEvent& event) {
@@ -132,13 +130,21 @@ void WaypointJoy::TimerCallback(const ros::TimerEvent& event) {
 
 void spawn_mav(const std::string &mav_name, const std::string &model_name, double x, double y, double z) {
   char buffer[1001];
-  snprintf(buffer, 1000, "roslaunch rotors_gazebo spawn_mav_with_state_publishers.launch\
-    x:=%f\
-    y:=%f\
-    z:=%f\
-    mav_name:=%s\
-    model_name:=%s",
-    x, y, z, mav_name.c_str(), model_name.c_str());
+  // snprintf(buffer, 1000, "env ROS_NAMESPACE=%s roslaunch rotors_gazebo spawn_mav_with_state_publishers.launch\
+  //   x:=%f\
+  //   y:=%f\
+  //   z:=%f\
+  //   mav_name:=%s\
+  //   model_name:=%s",
+  //   ros::this_node::getNamespace().c_str(), x, y, z, mav_name.c_str(), model_name.c_str());
+  snprintf(buffer, 1000, "env ROS_NAMESPACE=%s rosrun gazebo_ros spawn_model\
+    -param robot_description\
+    -urdf\
+    -x %f\
+    -y %f\
+    -z %f\
+    -model %s",
+    ros::this_node::getNamespace().c_str(), x, y, z, model_name.c_str());
   system(buffer);
 }
 
@@ -196,7 +202,12 @@ int main(int argc, char** argv) {
     ROS_INFO("Cannot despawn mav %s", mav_name.c_str());
   }
 
-  spawn_mav(mav_name, model_name);
+  double x, y, z;
+  ros::param::get("~spawn_x", x);
+  ros::param::get("~spawn_y", y);
+  ros::param::get("~spawn_z", z);
+
+  spawn_mav(mav_name, model_name, x, y, z);
 
   // Wait for 5 seconds to let the Gazebo GUI show up.
   ros::Duration(5.0).sleep();

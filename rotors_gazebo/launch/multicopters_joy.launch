@@ -1,0 +1,51 @@
+<launch>
+  <arg name="mav_name" default="firefly"/>
+  <arg name="group_name" default="$(arg mav_name)"/>
+  <arg name="enable_logging" default="false"/>
+  <arg name="enable_ground_truth" default="true"/>
+  <arg name="log_file" default="$(arg mav_name)"/>
+  <arg name="gdb" default="false"/>
+  <arg name="plot" default="false"/>
+  <arg name="y" default="0.0"/>
+
+  <include file="$(find rotors_gazebo)/launch/mav_with_waypoint_publisher_joy.launch">
+    <arg name="no_world" value="true"/>
+    <arg name="mav_name" value="$(arg mav_name)"/>
+    <arg name="robot_name" value="$(arg group_name)_1"/>
+    <arg name="x" value="1"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="plot" value="$(arg plot)"/>
+    <arg name="enable_logging" value="$(arg enable_logging)"/>
+    <arg name="enable_ground_truth" value="$(arg enable_ground_truth)"/>
+  </include>
+  <include file="$(find rotors_gazebo)/launch/mav_with_waypoint_publisher_joy.launch">
+    <arg name="no_world" value="true"/>
+    <arg name="mav_name" value="$(arg mav_name)"/>
+    <arg name="robot_name" value="$(arg group_name)_2"/>
+    <arg name="x" value="2"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="plot" value="$(arg plot)"/>
+    <arg name="enable_logging" value="$(arg enable_logging)"/>
+    <arg name="enable_ground_truth" value="$(arg enable_ground_truth)"/>
+  </include>
+  <include file="$(find rotors_gazebo)/launch/mav_with_waypoint_publisher_joy.launch">
+    <arg name="no_world" value="true"/>
+    <arg name="mav_name" value="$(arg mav_name)"/>
+    <arg name="robot_name" value="$(arg group_name)_3"/>
+    <arg name="x" value="3"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="plot" value="$(arg plot)"/>
+    <arg name="enable_logging" value="$(arg enable_logging)"/>
+    <arg name="enable_ground_truth" value="$(arg enable_ground_truth)"/>
+  </include>
+  <include file="$(find rotors_gazebo)/launch/mav_with_waypoint_publisher_joy.launch">
+    <arg name="no_world" value="true"/>
+    <arg name="mav_name" value="$(arg mav_name)"/>
+    <arg name="robot_name" value="$(arg group_name)_4"/>
+    <arg name="x" value="4"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="plot" value="$(arg plot)"/>
+    <arg name="enable_logging" value="$(arg enable_logging)"/>
+    <arg name="enable_ground_truth" value="$(arg enable_ground_truth)"/>
+  </include>
+</launch>

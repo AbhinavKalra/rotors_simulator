@@ -95,7 +95,7 @@ void WaypointJoy::JoyCallback(const sensor_msgs::JoyConstPtr& msg) {
     msg->axes[1] * 0.01,
     msg->axes[4] * 0.01,
     msg->axes[3] * DEG_2_RAD * 180 };
-  ROS_INFO("cmds_ %d %lf %lf %lf %lf", cmds_.seq, cmds_.x, cmds_.y, cmds_.z, cmds_.yaw);
+  ROS_DEBUG("cmds_ %d %lf %lf %lf %lf", cmds_.seq, cmds_.x, cmds_.y, cmds_.z, cmds_.yaw);
 }
 
 void WaypointJoy::TimerCallback(const ros::TimerEvent& event) {
@@ -120,7 +120,7 @@ void WaypointJoy::TimerCallback(const ros::TimerEvent& event) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position_,
       desired_yaw_, &trajectory_msg);
 
-  ROS_INFO("Publishing waypoint on namespace %s: [%f, %f, %f].",
+  ROS_DEBUG("Publishing waypoint on namespace %s: [%f, %f, %f].",
            nh_.getNamespace().c_str(),
            desired_position_.x(),
            desired_position_.y(),

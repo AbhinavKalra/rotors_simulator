@@ -141,3 +141,44 @@ $ roslaunch rotors_gazebo mav_hovering_example.launch mav_name:=firefly world_na
 #### Usage with a joystick
 
 **TODO(ff):** `Write something here.`
+
+#### Using a joystick to control multiple multicopters
+
+You can use a joystick to control a single multicopter by launching:
+
+```
+$ roslaunch rotors_gazebo mav_with_waypoint_publisher_joy.launch
+```
+
+Wait for a few seconds for the simulation to load. When the multicopter start hovering a little bit above the ground, you can then use the left analog stick to control the multicopter's position on the XY plane. Pushing the right analog stick forward or backward will control the elavation upward or downward respectively.
+
+You can also use the same launch file to spawn multiple multicopters, by launching with an extra `no_spawn` argument:
+
+```
+$ roslaunch rotors_gazebo mav_with_waypoint_publisher_joy.launch no_spawn:=true
+```
+
+This will launch an empty gazebo scene in which you can spawn a multicopter with the command:
+
+```
+$ roslaunch rotors_gazebo mav_with_waypoint_publisher_joy.launch no_world:=true mav_name:=firefly robot_name:=robot1
+```
+
+Upon exiting, the launch file does not remove the spawned model from the scene. However, the launch file does remove any existing model with the same name as the `robot_name` parameter when starting up. All multicopters spawned with this method accept the same input commands from the joystick.
+
+The following is the list of parameters for the launch file:
+  * `robot_name` *(string, default=`$(arg mav_name)`)* name of the multicopter's model in Gazebo  
+  * `no_world`   *(boolean, default=false)* do not start Gazebo
+  * `no_spawn`   *(boolean, default=false)* do not spawn a multicopter
+  * `gdb`        *(boolean, default=false)* debug the position controller and the joy to waypoint interface with gdb
+  * `plot`       *(boolean, default=true)* display position and orientation plots
+  * `x`          *(double, default=0.0)* the starting X position
+  * `y`          *(double, default=0.1)* the starting Y position
+  * `z`          *(double, default=0.1)* the starting Z position
+
+An example launch file for spawning four multicopters of the same model at once is also provided.
+
+```
+$ roslaunch rotors_gazebo multicopters_joy.launch mav_name:=firefly group_name:=group1
+```
+

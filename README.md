@@ -182,3 +182,7 @@ An example launch file for spawning four multicopters of the same model at once 
 $ roslaunch rotors_gazebo multicopters_joy.launch mav_name:=firefly group_name:=group1
 ```
 
+**Notes for Crazyflie 2.0:**
+  * The [current gains](rotors_gazebo/resource/lee_controller_crazyflie2.yaml) for Crazyflie respond very slowly to positional changes along the X and Y axes and cannot handle drastic changes.
+  * There are two example launch file created specificly for testing Crazyflie parameters: [crazyflie\_hovering\_example.launch](rotors_gazebo/launch/crazyflie_hovering_example.launch) and [crazyflie\_with\_wind\_gust.launch](rotors_gazebo/launch/crazyflie_with_wind_gust.launch). The latter creates a weaker wind gust force than in [mav\_with\_wind\_gust.launch](rotors_gazebo/launch/mav_with_wind_gust.launch) because of the much lower mass of the Crazyflie. Both launch files support gdb debugging and pose plotting.
+  * The current model of the Crazyflie's rotors is the default one, not the actual rotor model.
